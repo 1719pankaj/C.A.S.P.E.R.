@@ -29,5 +29,5 @@ On Android versions prior to Android 6.0, DankMemes requires the following permi
 
 ## Contributing
 
-Checkout if there are issues you'd like to address.
-Follow Contributing.md for guidelines.
+- Checkout if there are issues you'd like to address.
+- Follow Contributing.md for guidelines.
