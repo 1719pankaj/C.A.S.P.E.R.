@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/headingTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Defender of the Arse"
+        android:textSize="38sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:textColor="@color/mangoPulpyTatti"/>
+
+    <EditText
+        android:id="@+id/holderET"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/headingTV"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="Placeholder"
+        android:padding="5dp"
+        android:gravity="start"
+        android:background="@drawable/edt_des"/>
+
+    <Button
+        android:id="@+id/wooshBT"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/holderET"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Woosh!"/>
+
+</RelativeLayout>
