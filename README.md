@@ -17,10 +17,16 @@ This application was originally created by Pankaj Kumar Roy and released under t
 - Install and run the latest build from releases
 - Click on the bigass button
 - Grant overlay permission
-- Click the same button again
 - Viola!
 - Now go ahead and add the QS Tile so you never have to look at that horendous app.
 - !! DO NOT BLOCK THE NOTIFICATION FOR THE DAMN APP !!
+
+## The Unintuitive Bits
+
+- Space under Mi Casa, Su Casa next to the close button is supposed to be the drag handle.
+- The close button releases focus from the window and closes the keyboard.
+- Long pressing the close button instantly closes floating view.
+- Copy button copies to clipboard and releases focus.
 
 ## Permissions
 
