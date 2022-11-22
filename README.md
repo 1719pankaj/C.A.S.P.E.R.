@@ -9,8 +9,8 @@ This application was originally created by Pankaj Kumar Roy and released under t
 
 ## Features
 
-The android app lets you:
--Floats over everything and holds text, that's it that's all it does.
+- Floats over everything and holds text, that's it that's all it does.
+- And its got that QS tile thing, but mostly the floaty bit
 
 ## How To(s)
 
