@@ -10,7 +10,7 @@ This application was originally created by Pankaj Kumar Roy and released under t
 ## Features
 
 - Floats over everything and holds text, that's it that's all it does.
-- And its got that QS tile thing, but mostly the floaty bit
+- And its got that QS tile thing, but mostly it just floats
 
 ## How To(s)
 
