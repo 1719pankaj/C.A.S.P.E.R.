@@ -30,8 +30,11 @@ This application was originally created by Pankaj Kumar Roy and released under t
 
 ## Permissions
 
-On Android versions prior to Android 6.0, DankMemes requires the following permissions:
 - Draw over other apps
+
+## Requirements
+
+- Won't work on anything before Oreo
 
 ## Contributing
 
