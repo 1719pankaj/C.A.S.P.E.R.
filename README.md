@@ -15,10 +15,9 @@ This application was originally created by Pankaj Kumar Roy and released under t
 ## How To(s)
 
 - Install and run the latest build from releases
-- Click on the bigass button
-- Grant overlay permission
-- Viola!
-- Now go ahead and add the QS Tile so you never have to look at that horendous app.
+- Add the QS Tile, and long press it
+- Grant overlay permission (Android 10+ doesn't allow automatic routing from QS)
+- Voila!!
 - !! DO NOT BLOCK THE NOTIFICATION FOR THE DAMN APP !!
 
 ## The Unintuitive Bits
