@@ -47,6 +47,7 @@ class FloatingWindowApp : Service() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate() {
         super.onCreate()
+
         startForeground()
 
         val metrics = applicationContext.resources.displayMetrics
