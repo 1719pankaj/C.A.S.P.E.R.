@@ -25,7 +25,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import com.example.placeholdercas.Common.Companion.currDes
-import kotlinx.android.synthetic.main.activity_main.*
+//import kotlinx.android.synthetic.main.activity_main.* TODO This should allow safe delete of activity_main.xml
 import kotlinx.android.synthetic.main.floating_layout.view.*
 
 class FloatingWindowApp : Service() {
