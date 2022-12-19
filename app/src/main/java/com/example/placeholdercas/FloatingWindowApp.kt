@@ -12,11 +12,11 @@ import android.graphics.Color
 import android.graphics.PixelFormat
 import android.os.Build
 import android.os.IBinder
-import android.text.ClipboardManager
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.view.*
-import android.view.View.OnTouchListener
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -25,8 +25,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
 import com.example.placeholdercas.Common.Companion.currDes
-//import kotlinx.android.synthetic.main.activity_main.* TODO This should allow safe delete of activity_main.xml
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.floating_layout.view.*
+
 
 class FloatingWindowApp : Service() {
 
@@ -34,11 +38,15 @@ class FloatingWindowApp : Service() {
     private lateinit var floatWindowLayoutPrams: WindowManager.LayoutParams
     private var LAYOUT_TYPE: Int? = null
     private lateinit var windowManager: WindowManager
+    private lateinit var database: DatabaseReference
 
     lateinit var btnWeii: ImageView
     lateinit var edtHolder: EditText
     lateinit var btnCopy: ImageView
     lateinit var btnClear: ImageView
+    lateinit var saveBT: ImageView
+    lateinit var dropBT: ImageView
+    lateinit var cpsBT: ImageView
 
     override fun onBind(p0: Intent?): IBinder? {
         TODO("Not yet implemented")
@@ -56,16 +64,28 @@ class FloatingWindowApp : Service() {
 
         windowManager = getSystemService(WINDOW_SERVICE) as WindowManager
 
+        database = FirebaseDatabase.getInstance("https://casper-64636-default-rtdb.asia-southeast1.firebasedatabase.app").reference
+        Firebase.database.setPersistenceEnabled(true)
+
         val inflater = baseContext.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         floatView = inflater.inflate(R.layout.floating_layout, null) as ViewGroup
         btnWeii = floatView.findViewById(R.id.weiiBT)
+
         edtHolder = floatView.findViewById(R.id.holderET)
+        edtHolder.inputType = InputType.TYPE_TEXT_FLAG_MULTI_LINE or InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+        edtHolder.isSingleLine = false
+        edtHolder.maxHeight = 500
+
         btnCopy = floatView.findViewById(R.id.copyIV)
         btnClear = floatView.findViewById(R.id.clearIV)
 
         edtHolder.setText(currDes)
         edtHolder.setSelection(edtHolder.text.toString().length)
         edtHolder.isCursorVisible = false
+
+        saveBT = floatView.findViewById(R.id.saveBT)
+        dropBT = floatView.findViewById(R.id.dropBT)
+        cpsBT = floatView.findViewById(R.id.cpsBT)
 
         LAYOUT_TYPE = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 
@@ -161,6 +181,19 @@ class FloatingWindowApp : Service() {
 
         btnClear.setOnClickListener {
             edtHolder.text = null
+        }
+
+        saveBT.setOnClickListener {
+            if(currDes == "") {
+                val toast = Toast.makeText(applicationContext, "No Text", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.TOP or Gravity.START, 0, 0)
+                toast.show()
+            } else {
+                currDes?.let { it1 -> database.child("clipboard").child(it1.substring(0,20)).setValue(currDes) }
+                val toast = Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.TOP or Gravity.START, 0, 0)
+                toast.show()
+            }
         }
 
     }
