@@ -15,8 +15,8 @@ import android.os.IBinder
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
-import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -24,10 +24,12 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.PRIORITY_MIN
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.placeholdercas.Common.Companion.currDes
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.floating_layout.view.*
 
@@ -38,6 +40,7 @@ class FloatingWindowApp : Service() {
     private lateinit var floatWindowLayoutPrams: WindowManager.LayoutParams
     private var LAYOUT_TYPE: Int? = null
     private lateinit var windowManager: WindowManager
+
     private lateinit var database: DatabaseReference
 
     lateinit var btnWeii: ImageView
@@ -47,6 +50,7 @@ class FloatingWindowApp : Service() {
     lateinit var saveBT: ImageView
     lateinit var dropBT: ImageView
     lateinit var cpsBT: ImageView
+
 
     override fun onBind(p0: Intent?): IBinder? {
         TODO("Not yet implemented")
@@ -67,6 +71,9 @@ class FloatingWindowApp : Service() {
         database = FirebaseDatabase.getInstance("https://casper-64636-default-rtdb.asia-southeast1.firebasedatabase.app").reference
         Firebase.database.setPersistenceEnabled(true)
 
+
+
+
         val inflater = baseContext.getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
         floatView = inflater.inflate(R.layout.floating_layout, null) as ViewGroup
         btnWeii = floatView.findViewById(R.id.weiiBT)
@@ -77,7 +84,7 @@ class FloatingWindowApp : Service() {
         edtHolder.maxHeight = 500
 
         btnCopy = floatView.findViewById(R.id.copyIV)
-        btnClear = floatView.findViewById(R.id.clearIV)
+        btnClear = floatView.findViewById(R.id.listDeleteIV)
 
         edtHolder.setText(currDes)
         edtHolder.setSelection(edtHolder.text.toString().length)
@@ -86,6 +93,8 @@ class FloatingWindowApp : Service() {
         saveBT = floatView.findViewById(R.id.saveBT)
         dropBT = floatView.findViewById(R.id.dropBT)
         cpsBT = floatView.findViewById(R.id.cpsBT)
+
+
 
         LAYOUT_TYPE = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
 
@@ -189,10 +198,11 @@ class FloatingWindowApp : Service() {
                 toast.setGravity(Gravity.TOP or Gravity.START, 0, 0)
                 toast.show()
             } else {
-                currDes?.let { it1 -> database.child("clipboard").child(it1.substring(0,20)).setValue(currDes) }
+                currDes?.let { it1 -> database.child("clipboard").child(if (it1.length >= 20) it1.substring(0, 20) else it1).setValue(currDes) }
                 val toast = Toast.makeText(applicationContext, "Saved", Toast.LENGTH_SHORT)
                 toast.setGravity(Gravity.TOP or Gravity.START, 0, 0)
                 toast.show()
+                val it1 = currDes
             }
         }
 
@@ -220,14 +230,7 @@ class FloatingWindowApp : Service() {
     private fun startForeground() {
 
 
-        val channelId =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                createNotificationChannel()
-            } else {
-                // If earlier version channel ID is not used
-                // https://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html#NotificationCompat.Builder(android.content.Context)
-                ""
-            }
+        val channelId = createNotificationChannel()
 
         val notificationBuilder = NotificationCompat.Builder(this, channelId )
         val notification = notificationBuilder.setOngoing(true)
@@ -239,7 +242,6 @@ class FloatingWindowApp : Service() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannel(): String{
         val channelId = "service"
         val channelName = "Floating Window Service"

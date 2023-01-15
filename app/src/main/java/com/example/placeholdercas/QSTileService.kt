@@ -20,6 +20,8 @@ class QSTileService : TileService() {
         }
     }
 
+
+
 //    private fun requestFloatingWindowPermision() {
 //        val builder = AlertDialog.Builder(this)
 //        builder.setCancelable(true)

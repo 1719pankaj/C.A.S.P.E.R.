@@ -25,6 +25,7 @@
             android:layout_marginStart="5dp">
 
             <EditText
+                android:paddingStart="4dp"
                 android:id="@+id/holderET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -33,12 +34,12 @@
                 android:scrollbars="vertical"
                 android:hint="Mi Casa, Su Casa"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/clearIV"
+                app:layout_constraintEnd_toStartOf="@id/listDeleteIV"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
-                android:id="@+id/clearIV"
+                android:id="@+id/listDeleteIV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
@@ -65,9 +66,10 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/rightCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginTop="5dp"
         android:elevation="5dp"
         app:cardCornerRadius="15dp"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
@@ -84,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/cross_ic"
                 android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cpsBT"
@@ -94,6 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/collapse_ic"
+                android:layout_marginStart="5dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -104,6 +108,7 @@
 
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/leftCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -145,7 +150,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 
 
